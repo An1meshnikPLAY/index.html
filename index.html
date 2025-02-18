@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тапалка</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: url('https://github.com/An1meshnikPLAY/index.html/blob/main/uiKxffX.jpeg?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        #counter {
+            font-size: 48px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .button {
+            font-size: 24px;
+            padding: 15px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background-color: #ffcc00;
+            color: black;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .upgrade {
+            font-size: 18px;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff6600;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .profile-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тапай как можно быстрее! 🏆</h1>
+    <div class="profile-circle">
+        <img src="https://github.com/An1meshnikPLAY/index.html/blob/main/photo_2025-02-18_22-15-45.jpg?raw=true" alt="Аватар">
+    </div>
+    <div id="counter">0</div>
+    <button class="button" onclick="tap()">Тап!</button>
+    <button class="upgrade" onclick="buyUpgrade()">Купить апгрейд (+1 монета за клик) - 10 монет</button>
+
+    <script>
+        let count = parseInt(localStorage.getItem('coins')) || 0;
+        let perClick = parseInt(localStorage.getItem('perClick')) || 1;
+        document.getElementById('counter').innerText = count;
+
+        function tap() {
+            count += perClick;
+            document.getElementById('counter').innerText = count;
+            localStorage.setItem('coins', count);
+        }
+
+        function buyUpgrade() {
+            if (count >= 10) {
+                count -= 10;
+                perClick++;
+                document.getElementById('counter').innerText = count;
+                localStorage.setItem('coins', count);
+                localStorage.setItem('perClick', perClick);
+            } else {
+                alert("Недостаточно монет!");
+            }
+        }
+
+        if (window.Telegram && Telegram.WebApp) {
+            Telegram.WebApp.expand();
+        }
+    </script>
+</body>
+</html>
